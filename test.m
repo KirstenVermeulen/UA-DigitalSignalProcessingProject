@@ -16,6 +16,9 @@ for r=1:size(data,1)
     end
 end
 
+%% outlier removal
+A = [57 59 60 100 59 58 57 58 300 61 62 60 62 58 57];
+disp(outLierRemoval(A,2));
 %% Specifications %%
 
 % Time %
