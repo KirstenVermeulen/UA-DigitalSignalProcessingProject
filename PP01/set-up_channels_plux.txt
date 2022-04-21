@@ -1,0 +1,12 @@
+elektrode locaties en MVC testing: richtlijnen uit Barbero et al. (2012)
+
+grond elektrode: manubrium sterni
+
+kanaal 1 = M. Trapezius Descendens (links)
+kanaal 2 = M. Trapezius Descendens (rechts)
+kanaal 3 = M. Deltoïdeus Anterior (links)
+kanaal 4 = M. Deltoïdeus Anterior (rechts)
+kanaal 5 = M. Extensor Carpi Radialis (dominante kant)
+
+sampling rate: 1000 Hz
+resolution: 16 bit
