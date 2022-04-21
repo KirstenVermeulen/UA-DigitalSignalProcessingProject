@@ -30,17 +30,26 @@ disp(outLierRemoval(A,2));
 % Time %
 samplingRate = header.x00_07_80_3B_46_63.samplingRate;      % Samples/Second
 dt = 1/samplingRate;                                        % Seconds/Sample
-stopTime = size(data, 1)/samplingRate;                                   % Seconds
+%stopTime = size(data, 1)/samplingRate;                      % Seconds
+stopTime = 1;
 t = (0:dt:stopTime-dt)';
 N = size(t,1);
 
 % Frequency %
 df = samplingRate/N;                                        % Hertz
-f = (-samplingRate/2:df:samplingRate/2-df)';                   % Hertz
+f = (-samplingRate/2:df:samplingRate/2-df)';                % Hertz
+
+
+%% Sine wave %%
+Fc = 12;                       % hertz
+x = cos(2*pi*Fc*t) + cos(2*pi*100*t);
 
 %% Fast Fourier Transform %%
 
-fourierTransform = fft(data);
+%fourierTransform = fft(data);
+%fourierShift = fftshift(fourierTransform);
+
+fourierTransform = fft(x);
 fourierShift = fftshift(fourierTransform);
 
 %% Time spectrum %%
@@ -56,7 +65,8 @@ tiledlayout(5,1)
 
 for i=1:1:5
     ax = nexttile;
-    plot(ax, f, abs(fourierShift(:,1))/N);
+    %plot(ax, f, abs(fourierShift(:,1))/N);
+    plot(ax, f, abs(fourierShift)/N);
     title("Sensor " + i)
 end
 
