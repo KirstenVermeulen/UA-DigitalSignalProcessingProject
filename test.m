@@ -7,6 +7,7 @@ data(:,2) = []; % colom 2 zegt enkel dat de data input waarden zijn
 
 samplingrate = header.x00_07_80_3B_46_63.samplingRate;
 
+
 %% alle waarden omzetten naar mV
 for r=1:size(data,1)
     for k=1:size(data,2)
@@ -14,3 +15,6 @@ for r=1:size(data,1)
     end
 end
 
+%% outlier removal
+A = [57 59 60 100 59 58 57 58 300 61 62 60 62 58 57];
+disp(outLierRemoval(A,2));
