@@ -25,6 +25,7 @@ end
 A = [57 59 60 100 59 58 57 58 300 61 62 60 62 58 57];
 disp(outLierRemoval(A,2));
 
+
 %% Specifications %%
 
 % Time %
@@ -42,6 +43,19 @@ f = (-samplingRate/2:df:samplingRate/2-df)';                   % Hertz
 
 fourierTransform = fft(data);
 fourierShift = fftshift(fourierTransform);
+fourierData = fourierShift(size(fourierShift, 1)/2:size(fourierShift, 1), :);
+f = f(size(f, 1)/2:size(f, 1), :);
+
+
+%% band pass
+lowerbound = 20;
+upperbound = 120;
+impulseResponse = 'iir';
+steepnessLowerBound = 0.95;
+steepnessUpperBound = 0.95;
+for k=1:size(fourierData,2)
+    fourierData(:, k) = bandpass(fourierData(:, k), [lowerbound, upperbound], samplingRate, 'ImpulseResponse', impulseResponse,'Steepness', [steepnessLowerBound , steepnessUpperBound]);
+end 
 
 %% Time spectrum %%
 tiledlayout(5,1)
@@ -56,17 +70,13 @@ tiledlayout(5,1)
 
 for i=1:1:5
     ax = nexttile;
-    plot(ax, f, abs(fourierShift(:,1))/N);
+    plot(ax, f, abs(fourierData(:,1))/N);
     title("Sensor " + i)
 end
 
-%% band pass
-lowerbound = 100;
-upperbound = 1000;
-impulseResponse = 'iir';
-steepnessLowerBound = 0.95;
-steepnessUpperBound = 0.95;
-for k=1:size(data,2)
-    data(:, k) = bandpass(data(:, k), [lowerbound, upperbound], samplingRate, 'ImpulseResponse', impulseResponse,'Steepness', [steepnessLowerBound , steepnessUpperBound]);
-end 
+%% Normalise
+norm_data = zeros(size(fourierData,1), size(fourierData,2));
+for k=1:size(norm_data,2)
+    norm_data(:, k) = Normalise(fourierData(:, k));
+end
 
