@@ -29,7 +29,7 @@ fourierTransform = fft(data);
 
 %% --- Outlier Removal --- %%
 A = [57 59 60 100 59 58 57 58 300 61 62 60 62 58 57];
-disp(outLierRemoval(A,2));
+filloutliers(input,'center','mean','ThresholdFactor', 3); %% laatste paramter vul je jouw std in
 
 %% Processing Track A %%
 
