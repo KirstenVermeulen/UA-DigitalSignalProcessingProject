@@ -42,7 +42,19 @@ filloutliers(input,'center','mean','ThresholdFactor', 3); %% laatste paramter vu
 % 
 % for k=1:size(fourierTransform,2)
 %     fourierTransform(:, k) = bandpass(fourierTransform(:, k), [lowerbound, upperbound], samplingRate, 'ImpulseResponse', impulseResponse,'Steepness', [steepnessLowerBound , steepnessUpperBound]);
-% end 
+% end
+
+% --- butterworth filter --- %
+fc =10; % cutoff frequency
+fs = 60; % sampeling frequency
+n_order = 1; % filter orde
+
+[b,a] = butter(n_order,fc/(fs/2)); %% creates fitler coefficients
+freqz(b,a,[],fs);
+
+subplot(2,1,1)
+ylim([-100 20])
+
 
 %% --- Processing Track B --- %%
 windowSize = 20;
