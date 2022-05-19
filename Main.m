@@ -1,5 +1,10 @@
 %% --- Load Raw Data --- %%
-[header, X] = ReadFile("PP01/S1_MVC_delt_links.txt");
+path = "PP01/S1_MVC_delt_links.txt";
+
+header = jsondecode(strrep(string(textscan(fopen(path, "r"),'%s',1,'delimiter','\n', 'headerlines',1)),"# ", ""));
+    
+X = readmatrix(path, 'HeaderLines', 3, 'ExpectedNumVariables', 7);
+X(:,1:2) = [];
 
 %% --- Scale to mV --- %%
 for r=1:size(X,1)
@@ -22,12 +27,20 @@ xlabel('t (seconds)')
 ylabel('X(t)')
 
 %% --- FFT Analyse --- %%
-[Y, twoSided, singleSided] = FastFourierTransform(X, L);
+Y = fft(X);                    % Fast Fourier Transform
+
+P1 = 
+
+for i = 1:size(Y,2)
+    P2 = abs(Y(:,i)/L);      % two-sided spectrum
+    P1 = P2(1:L/2+1);   % single-sided spectrum
+    P1(2:end-1) = 2*P1(2:end-1);
+end
 
 %% --- Plot 2 --- %
 f = Fs * (0:(L/2)) / L;
 
-plot(f,singleSided) 
+plot(f,P1);
 title('Single-Sided Amplitude Spectrum of X(t)');
 xlabel('f (Hz)');
 ylabel('|P1(f)|');
