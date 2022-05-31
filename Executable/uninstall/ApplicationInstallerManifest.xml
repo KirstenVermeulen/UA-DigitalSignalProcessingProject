@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationInstallerManifest>
+   <DefaultInstallationDirectory>%ProgramFiles%\FinalApp\</DefaultInstallationDirectory>
+   <ApplicationName>FinalApp</ApplicationName>
+   <ExecutableName>application\FinalApp.exe</ExecutableName>
+   <GUID>d11dd532-70d1-46cb-9a01-e4a27c60f76f</GUID>
+   <ApplicationIcon>default_icon_48.png</ApplicationIcon>
+   <Logo>default_logo.png</Logo>
+   <Version>1.0</Version>
+   <AddRemoveProgramIcon>application\default_icon.ico</AddRemoveProgramIcon>
+   <WelcomePanelText>FinalApp 1.0</WelcomePanelText>
+   <MCRProducts>
+      <MCRProduct>
+         <ExternalProductIdentifier>35000</ExternalProductIdentifier>
+      </MCRProduct>
+      <MCRProduct>
+         <ExternalProductIdentifier>35010</ExternalProductIdentifier>
+      </MCRProduct>
+      <MCRProduct>
+         <ExternalProductIdentifier>35108</ExternalProductIdentifier>
+      </MCRProduct>
+   </MCRProducts>
+</ApplicationInstallerManifest>
